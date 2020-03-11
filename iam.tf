@@ -62,9 +62,13 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "default" {
   role       = "${aws_iam_role.default.name}"
-  policy_arn = ["${aws_iam_policy.default.arn}", "${aws_iam_policy.ec2.arn}"]
+  policy_arn = "${aws_iam_policy.default.arn}"
 }
 
+resource "aws_iam_role_policy_attachment" "ec2" {
+  role       = "${aws_iam_role.default.name}"
+  policy_arn = "${aws_iam_policy.ec2.arn}"
+}
 resource "aws_iam_instance_profile" "default" {
   name = "terraform-ebs"
   role = "${aws_iam_role.default.name}"
