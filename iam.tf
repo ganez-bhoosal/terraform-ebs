@@ -37,7 +37,7 @@ resource "aws_iam_policy" "default" {
 }
 
 resource "aws_iam_policy" "ec2" {
-  name   = "terraform-ebs"
+  name   = "terraform-ebs-ec2"
   policy = "${data.aws_iam_policy_document.ec2.json}"
 }
 
