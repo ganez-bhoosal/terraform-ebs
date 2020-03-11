@@ -4,7 +4,7 @@ pip install awscli
 
 vol="vol-0b52b8f26ac4dcda9"
 mount_dir="/ganesh"
-device="/dev/xvdf/"
+device="/dev/xvdf"
 
 if [ ! -d $mount_dir ]
 then 
