@@ -14,12 +14,26 @@ data "aws_iam_policy_document" "default" {
       "arn:aws:s3:::*"
     ]
   }
+}
+
+data "aws_iam_policy_document" "ec2" {
+  statement {
+    sid = "1"
+
+    actions = [
+      "ec2:*"
+    ]
+
+    resources = [
+      "arn:aws:ec2:::*"
+    ]
+  }
 
 }
 
 resource "aws_iam_policy" "default" {
   name   = "terraform-ebs"
-  policy = "${data.aws_iam_policy_document.default.json}"
+  policy = ["${data.aws_iam_policy_document.default.json}", "${data.aws_iam_policy_document.ec2.json}"]
 }
 
 resource "aws_iam_role" "default" {
