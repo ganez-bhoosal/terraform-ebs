@@ -1,3 +1,4 @@
+#!/bin/bash
 vol="vol-0b52b8f26ac4dcda9"
 mount_dir="/ganesh"
 device="/dev/xvdf/"
