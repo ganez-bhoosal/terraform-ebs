@@ -33,7 +33,12 @@ data "aws_iam_policy_document" "ec2" {
 
 resource "aws_iam_policy" "default" {
   name   = "terraform-ebs"
-  policy = ["${data.aws_iam_policy_document.default.json}", "${data.aws_iam_policy_document.ec2.json}"]
+  policy = "${data.aws_iam_policy_document.default.json}"
+}
+
+resource "aws_iam_policy" "ec2" {
+  name   = "terraform-ebs"
+  policy = "${data.aws_iam_policy_document.ec2.json}"
 }
 
 resource "aws_iam_role" "default" {
@@ -57,7 +62,7 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "default" {
   role       = "${aws_iam_role.default.name}"
-  policy_arn = "${aws_iam_policy.default.arn}"
+  policy_arn = ["${aws_iam_policy.default.arn}", "${aws_iam_policy.ec2.arn}"]
 }
 
 resource "aws_iam_instance_profile" "default" {
